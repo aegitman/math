@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mathematic equations generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1>Mathematic equations generator</h1>
+    </div>
+  
+
+<div class="checkboxDiv">
+    <div class="nrLineDiv">
+        <label>
+            <input type="checkbox" name="check2" data-value="2"> 2
+        </label>
+        <label>
+            <input type="checkbox" name="check3" data-value="3"> 3
+        </label>
+        <label>
+            <input type="checkbox" name="check4" data-value="4"> 4
+        </label>
+    </div>
+    <div class="nrLineDiv">
+        <label>
+            <input type="checkbox" name="check5" data-value="5"> 5
+        </label>
+        <label>
+            <input type="checkbox" name="check6" data-value="6"> 6
+        </label>
+        <label>
+            <input type="checkbox" name="check7" data-value="7"> 7
+        </label>
+    </div>
+    <div class="nrLineDiv">
+        <label>
+            <input type="checkbox" name="check8" data-value="8"> 8
+        </label>
+        <label>
+            <input type="checkbox" name="check9" data-value="9"> 9
+        </label>
+        <label>
+            <input type="checkbox" name="check10" data-value="10"> 10
+        </label>
+    </div>
+</div>
+
+<div class="centerDiv actionDiv">
+    <label>
+        Operation:
+        <select id="operationSel">
+            <option value="x">Multiply</option>
+            <option value="+">Addition</option>            
+        </select>
+    </label>
+</div>
+
+<div class="centerDiv">
+    <label>Number of questions:</label>
+    <input type="number" id="quantity" class="numberInput" required min="10" max="40" placeholder="10">
+</div>
+
+<div class="generateBtn">
+    <button type="button" name="generate" onclick="generateTable()">
+        Generate
+    </button>
+</div>
+
+
+<hr/>
+
+<div id="content">
+    <div id="table"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="scripts.js"></script>
+</body>
+
+</html>

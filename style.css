@@ -1,0 +1,45 @@
+.checkboxDiv {
+    display: flex; flex-direction: column; justify-content: space-between; width: 50%; padding-left: 25%;
+}
+
+.centerDiv {
+    display: flex; justify-content: center; margin-top: 10px;
+}
+
+.numberInput {
+    width: 40px; margin-left: 5px;
+}
+
+.generateBtn {
+    display: flex; justify-content: center; margin: 10px 0 0;
+}
+
+.equationDiv {
+    width: 200px;
+    border-bottom: 1px solid black;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+}
+
+.nrLineDiv {
+    display: flex;
+    justify-content: space-around;
+}
+
+.eqSpan{
+    width: 70px;
+    display: inline-block;
+}
+
+#table{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#table div {
+    margin-right: 30px;
+    margin-top: 10px;
+}
