@@ -1,85 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mathematic equations generator</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div style="text-align: center;">
-        <h1>Mathematic equations generator</h1>
-    </div>
-  
-
-<div class="checkboxDiv">
-    <div class="nrLineDiv">
-        <label>
-            <input type="checkbox" name="check2" data-value="2"> 2
-        </label>
-        <label>
-            <input type="checkbox" name="check3" data-value="3"> 3
-        </label>
-        <label>
-            <input type="checkbox" name="check4" data-value="4"> 4
-        </label>
-    </div>
-    <div class="nrLineDiv">
-        <label>
-            <input type="checkbox" name="check5" data-value="5"> 5
-        </label>
-        <label>
-            <input type="checkbox" name="check6" data-value="6"> 6
-        </label>
-        <label>
-            <input type="checkbox" name="check7" data-value="7"> 7
-        </label>
-    </div>
-    <div class="nrLineDiv">
-        <label>
-            <input type="checkbox" name="check8" data-value="8"> 8
-        </label>
-        <label>
-            <input type="checkbox" name="check9" data-value="9"> 9
-        </label>
-        <label>
-            <input type="checkbox" name="check10" data-value="10"> 10
-        </label>
-    </div>
-</div>
-
-<div class="centerDiv actionDiv">
-    <label>
-        Operation:
-        <select id="operationSel">
-            <option value="x">Multiply</option>
-            <option value="+">Addition</option>            
-        </select>
-    </label>
-</div>
-
-<div class="centerDiv">
-    <label>Number of questions:</label>
-    <input type="number" id="quantity" class="numberInput" required min="10" max="40" placeholder="10">
-</div>
-
-<div class="generateBtn">
-    <button type="button" name="generate" onclick="generateTable()">
-        Generate
-    </button>
-</div>
-
-
-<hr/>
-
-<div id="content">
-    <div id="table"></div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="scripts.js"></script>
-</body>
-
+   <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Math - practice and improve</title>
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="images/favicon.ico" />
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- Typography CSS -->
+      <link rel="stylesheet" href="css/typography.css">
+      <!-- Style CSS -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive CSS -->
+      <link rel="stylesheet" href="css/responsive.css">
+   </head>
+   <body>
+      <!-- loader Start -->
+      <div id="loading">
+         <div id="loading-center">
+            <div class="loader">
+               <div class="cube">
+                  <div class="sides">
+                     <div class="top"></div>
+                     <div class="right"></div>
+                     <div class="bottom"></div>
+                     <div class="left"></div>
+                     <div class="front"></div>
+                     <div class="back"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- loader END -->
+      <!-- Wrapper Start -->
+      <div class="wrapper">
+         <!-- Sidebar  -->
+         <div class="iq-sidebar">
+            <div class="iq-sidebar-logo d-flex justify-content-between">
+               <a href="index.html">
+               <img src="images/logo.png" class="img-fluid" alt="">
+               <span>Math</span>
+               </a>
+               <div class="iq-menu-bt align-self-center">
+                  <div class="wrapper-menu">
+                     <div class="line-menu half start"></div>
+                     <div class="line-menu"></div>
+                     <div class="line-menu half end"></div>
+                  </div>
+               </div>
+            </div>
+            <div id="sidebar-scrollbar">
+               <nav class="iq-sidebar-menu">
+                  <ul id="iq-sidebar-toggle" class="iq-menu">
+                     <li class="iq-menu-title">
+                        <i class="ri-separator"></i>
+                        <span>Main</span>
+                     </li>
+                     <li class="active">
+                        <a href="#dashboard" class="iq-waves-effect">
+                           <i class="ri-home-4-line"></i>
+                           <span>Online Test</span></a>
+                     </li>
+                     <li>
+                        <a href="todo.html" class="iq-waves-effect">
+                           <i class="ri-chat-check-line"></i>
+                           <span>Genereaza fise</span></a></li>
+                     <li>
+                        <a href="todo.html" class="iq-waves-effect">
+                           <i class="ri-chat-check-line"></i>
+                           <span>Ghiceste rezultatul</span></a></li>
+                     <li>
+                        <a href="todo.html" class="iq-waves-effect">
+                           <i class="ri-chat-check-line"></i>
+                           <span>Masoara progresul</span></a></li>
+                  </ul>
+               </nav>
+               <div class="p-3"></div>
+            </div>
+         </div>
+         <!-- TOP Nav Bar -->
+         <div class="iq-top-navbar">
+            <div class="iq-navbar-custom">
+               <div class="iq-sidebar-logo">
+                  <div class="top-logo">
+                     <a href="index.html" class="logo">
+                     <img src="images/logo.png" class="img-fluid" alt="">
+                     <span>Math</span>
+                     </a>
+                  </div>
+               </div>
+               <div class="navbar-breadcrumb">
+                  <h5 class="mb-0">Online tests</h5>
+                  <nav aria-label="breadcrumb">
+                     <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Online Tests</li>
+                     </ul>
+                  </nav>
+               </div>
+               <nav class="navbar navbar-expand-lg navbar-light p-0">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="ri-menu-3-line"></i>
+                  </button>
+                  <div class="iq-menu-bt align-self-center">
+                     <div class="wrapper-menu">
+                        <div class="line-menu half start"></div>
+                        <div class="line-menu"></div>
+                        <div class="line-menu half end"></div>
+                     </div>
+                  </div>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav ml-auto navbar-list">                
+                        <li class="nav-item iq-full-screen">
+                           <a href="#" class="iq-waves-effect" id="btnFullscreen">
+                              <i class="ri-fullscreen-line"></i></a></li>
+                     </ul>
+                  </div>                 
+               </nav>
+            </div>
+         </div>
+         <!-- TOP Nav Bar END -->
+         <!-- Page Content  -->
+         <div id="content-page" class="content-page">
+            <div class="container-fluid">
+   
+               <div class="row">
+                  <div class="col-lg-12">
+                     <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                           <div class="iq-header-title">
+                              <h4 class="card-title">Test your knowledge</h4>
+                           </div>                           
+                        </div>
+                        <div class="iq-card-body">
+                              
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Wrapper END -->
+      <!-- Footer -->
+      <footer class="bg-white iq-footer">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-lg-6">
+                  <ul class="list-inline mb-0">
+                     <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
+                     <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                  </ul>
+               </div>
+               <div class="col-lg-6 text-right">
+                  Copyright 2024 <a href="#">Math</a> All Rights Reserved.
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- Footer END -->
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <!-- Appear JavaScript -->
+      <script src="js/jquery.appear.js"></script>
+      <!-- Countdown JavaScript -->
+      <script src="js/countdown.min.js"></script>
+      <!-- Counterup JavaScript -->
+      <script src="js/waypoints.min.js"></script>
+      <script src="js/jquery.counterup.min.js"></script>
+      <!-- Wow JavaScript -->
+      <script src="js/wow.min.js"></script>
+      <!-- Apexcharts JavaScript -->
+      <script src="js/apexcharts.js"></script>
+      <!-- Slick JavaScript -->
+      <script src="js/slick.min.js"></script>
+      <!-- Select2 JavaScript -->
+      <script src="js/select2.min.js"></script>
+      <!-- Owl Carousel JavaScript -->
+      <script src="js/owl.carousel.min.js"></script>
+      <!-- Magnific Popup JavaScript -->
+      <script src="js/jquery.magnific-popup.min.js"></script>
+      <!-- Smooth Scrollbar JavaScript -->
+      <script src="js/smooth-scrollbar.js"></script>
+      <!-- lottie JavaScript -->
+      <script src="js/lottie.js"></script>
+      <!-- Chart Custom JavaScript -->
+      <script src="js/chart-custom.js"></script>
+      <!-- Custom JavaScript -->
+      <script src="js/custom.js"></script>
+   </body>
 </html>
