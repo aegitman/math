@@ -17,6 +17,7 @@
       <link rel="stylesheet" href="css/responsive.css">
    </head>
    <body>
+      <script src="//unpkg.com/alpinejs" defer></script>
       <!-- loader Start -->
       <div id="loading">
          <div id="loading-center">
@@ -67,15 +68,8 @@
                      <li>
                         <a href="todo.html" class="iq-waves-effect">
                            <i class="ri-chat-check-line"></i>
-                           <span>Genereaza fise</span></a></li>
-                     <li>
-                        <a href="todo.html" class="iq-waves-effect">
-                           <i class="ri-chat-check-line"></i>
-                           <span>Ghiceste rezultatul</span></a></li>
-                     <li>
-                        <a href="todo.html" class="iq-waves-effect">
-                           <i class="ri-chat-check-line"></i>
-                           <span>Masoara progresul</span></a></li>
+                           <span>Generate PDF</span></a></li>
+                     
                   </ul>
                </nav>
                <div class="p-3"></div>
@@ -125,9 +119,74 @@
          <!-- TOP Nav Bar END -->
          <!-- Page Content  -->
          <div id="content-page" class="content-page">
-            <div class="container-fluid">
+            <div class="container-fluid" x-data="{
+               isExam: false, digits: [], ops: [], qt: 0, progress: true, unique: true, allEq: [], examEq: [],
+               startExam() {
+                  // validate the request
+                  if(this.digits.length == 0) {
+                     alert('Please select at least one number !');
+                     return;
+                  };
+                  if(this.ops.length == 0) {
+                     alert('Please select at least one operation !');
+                     return;
+                  };
+                  if(this.qt < 9 || this.qt > 99) {
+                     alert('Please choose a valid number of questions !');
+                     return;
+                  };
+                  
+                  // build the request
+                  if(this.ops.includes('m'))
+                  for(let d of this.digits) {
+                     for(let i = 1; i < 13; i++) {
+                        this.allEq.push({d: d, op: 'm', ex: i});
+                     }  
+                  }
 
-               <div class="iq-card" id="test-setup">
+                  if(this.ops.includes('d'))
+                  for(let d of this.digits) {
+                     for(let i = 1; i < 13; i++) {
+                     this.allEq.push({d: d*i, op: 'd', ex: d});
+                     }  
+                  }
+
+                  if(this.ops.includes('d'))
+                  for(let d of this.digits) {
+                     for(let i = 1; i < 13; i++) {
+                        this.allEq.push({d: d*i, op: 'd', ex: i});
+                     }  
+                  }
+                  // choose the questions and start the exam 
+                  let chosen = this.uniqueIndexes(this.allEq.length, this.qt);
+                  for(let c of chosen) {
+                     this.examEq.push(this.allEq[c]);
+                  }
+
+                  console.log(this.examEq);
+
+                  this.isExam = true;
+               },
+
+               endExam() {
+                  this.isExam = false;
+                  this.digits = [];
+                  this.ops = [];
+                  this.qt = 0;
+                  this.progress = true;
+                  this.unique = true;
+               },
+
+               uniqueIndexes(max, qty) {
+                  const retVal = new Set;
+                  while (retVal.size < qty) {
+                    retVal.add(Math.floor(Math.random() * max));
+                  }
+                  return Array.from(retVal);
+                }
+            }">
+
+               <div class="iq-card" id="test-setup" x-show="!isExam">
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
                         <h4 class="card-title">Test your knowledge</h4>
@@ -136,113 +195,73 @@
                   <div class="iq-card-body">
                      <p>Build your test requirements.</p>
                      <div class="form-group">
-                        <label for="exampleInputText1">Choose the numbers you want to use:</label>                           
-                        <br/>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check1">
-                           <label class="custom-control-label" for="check1">1</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check2">
-                           <label class="custom-control-label" for="check2">2</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check3">
-                           <label class="custom-control-label" for="check3">3</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check4">
-                           <label class="custom-control-label" for="check4">4</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check5">
-                           <label class="custom-control-label" for="check5">5</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check6">
-                           <label class="custom-control-label" for="check6">6</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check7">
-                           <label class="custom-control-label" for="check7">7</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check8">
-                           <label class="custom-control-label" for="check8">8</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check9">
-                           <label class="custom-control-label" for="check9">9</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check10">
-                           <label class="custom-control-label" for="check10">10</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check11">
-                           <label class="custom-control-label" for="check11">11</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="check12">
-                           <label class="custom-control-label" for="check12">12</label>
-                        </div>
+                        <label>Choose the numbers you want to use:</label>                           
+                        <br/>                        
+                        <template x-for="i in 10">
+                           <div class="custom-control custom-checkbox custom-control-inline">
+                              <input type="checkbox" :value="i" class="custom-control-input" :id="i" x-model="digits">
+                              <label class="custom-control-label" :for="i" x-text="i"></label>
+                           </div>
+                        </template>
                      </div>
+                     
                      <div class="form-group">
-                        <label for="exampleInputText1">Choose the operations:</label>                           
+                        <label>Choose the operations:</label>                           
                         <br/>
                         <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="checkPlus">
-                           <label class="custom-control-label" for="checkPlus">+</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="checkMinus">
-                           <label class="custom-control-label" for="checkMinus">-</label>
-                        </div>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="checkMultiply">
+                           <input type="checkbox" class="custom-control-input" value="m" id="checkMultiply" x-model="ops">
                            <label class="custom-control-label" for="checkMultiply">x</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
-                           <input type="checkbox" class="custom-control-input" id="checkDivide">
+                           <input type="checkbox" class="custom-control-input" value="d" id="checkDivide" x-model="ops">
                            <label class="custom-control-label" for="checkDivide">&div;</label>
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="quantityInput">Choose the number of equations (10 - 99):</label>                                                      
-                        <input type="number" style="width: 40%;" class="form-control" id="quantityInput">
+                        <input type="number" style="width: 40%;" class="form-control" min="10" max="99"
+                                 id="quantityInput" x-model="qt" placeholder="10">
                      </div>
                      <div class="form-group">
-                        <label for="quantityInput">Extra options for the test:</label>       <br/>                                              
+                        <label for="quantityInput">Extra options for the test:</label>   
+                        <br/>                                              
                         <div class="custom-control custom-switch custom-switch-text custom-control-inline">
                            <div class="custom-switch-inner">
                               <p class="mb-0">Show live progress? </p>
-                              <input type="checkbox" class="custom-control-input" id="customSwitch-11" checked="">
-                              <label class="custom-control-label" for="customSwitch-11" data-on-label="Yes" data-off-label="No">
+                              <input type="checkbox" class="custom-control-input" id="progress" x-model="progress">
+                              <label class="custom-control-label" for="progress" data-on-label="Yes" data-off-label="No">
                               </label>
                            </div>
                         </div>
                         <div class="custom-control custom-switch custom-switch-text custom-control-inline">
                            <div class="custom-switch-inner">
                               <p class="mb-0">Unique questions? </p>
-                              <input type="checkbox" class="custom-control-input" id="customSwitch-11" checked="">
-                              <label class="custom-control-label" for="customSwitch-11" data-on-label="Yes" data-off-label="No">
+                              <input type="checkbox" class="custom-control-input" id="unique" x-model="unique">
+                              <label class="custom-control-label" for="unique" data-on-label="Yes" data-off-label="No">
                               </label>
                            </div>
                         </div>
                      </div>      
                      <br/>
-                     <button type="submit" class="btn btn-primary">Start</button>
+                     <button type="button" class="btn btn-primary" @click="startExam()">Start</button>
                   </div>
                </div>
 
-               <div class="iq-card" id="test-run">
+
+               <div class="iq-card" id="test-run" x-show="isExam">
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
                         <h4 class="card-title">Test execution</h4>
                      </div>
                   </div>
                   <div class="iq-card-body">
-                     
+
+                     <template>
+                        
+                     </template>
+
+
+                     <button type="button" class="btn btn-primary" @click="endExam()">End test</button>
                   </div>
                </div>               
             </div>
