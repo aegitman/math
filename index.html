@@ -15,6 +15,22 @@
       <link rel="stylesheet" href="css/style.css">
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="css/responsive.css">
+
+      <style type="text/css">
+         .digit{
+            width: 60px;
+         }
+         .operation {
+            width: 40px;
+            text-align: center;
+         }
+         .questionDiv{
+            font-size: 30px;
+         }
+         .answer {
+            width: 60px;
+         }
+      </style>
    </head>
    <body>
       <script src="//unpkg.com/alpinejs" defer></script>
@@ -121,6 +137,7 @@
          <div id="content-page" class="content-page">
             <div class="container-fluid" x-data="{
                isExam: false, digits: [], ops: [], qt: 0, progress: true, unique: true, allEq: [], examEq: [],
+               currExam:{}, currQestion: 1, 
                startExam() {
                   // validate the request
                   if(this.digits.length == 0) {
@@ -164,6 +181,7 @@
                   }
 
                   console.log(this.examEq);
+                  this.currExam = this.examEq[0];
 
                   this.isExam = true;
                },
@@ -183,6 +201,13 @@
                     retVal.add(Math.floor(Math.random() * max));
                   }
                   return Array.from(retVal);
+                },
+
+                opConverter(op){
+                  if('d' == op)
+                     return '÷';
+                  if('m' == op)
+                     return '×';
                 }
             }">
 
@@ -210,7 +235,7 @@
                         <br/>
                         <div class="custom-control custom-checkbox custom-control-inline">
                            <input type="checkbox" class="custom-control-input" value="m" id="checkMultiply" x-model="ops">
-                           <label class="custom-control-label" for="checkMultiply">x</label>
+                           <label class="custom-control-label" for="checkMultiply">&times;</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                            <input type="checkbox" class="custom-control-input" value="d" id="checkDivide" x-model="ops">
@@ -255,12 +280,22 @@
                      </div>
                   </div>
                   <div class="iq-card-body">
-
-                     <template>
-                        
-                     </template>
-
-
+                     <div>
+                        <span>Question</span>
+                        <span x-text="currQestion">x</span>
+                        <span>out of</span>
+                        <span x-text="examEq.length">y</span>
+                     </div><br/>
+                    <div class="questionDiv">
+                      <span class="digit" x-text="currExam.d"></span>
+                      <span class="operation" x-text="opConverter(currExam.op)"></span>
+                      <span class="digit" x-text="currExam.ex"></span>
+                      <span>=</span>
+                      <input type="number" class="answer" x-model="currExam.ans">
+                    </div><br/><br/>
+                    <button type="button" class="btn btn-success" @click="prevQuestion()"><< Previous</button>
+                    <button type="button" class="btn btn-success" @click="nextQuestion()">Next >></button>
+                    <br/><br/>
                      <button type="button" class="btn btn-primary" @click="endExam()">End test</button>
                   </div>
                </div>               
