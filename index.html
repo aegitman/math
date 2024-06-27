@@ -17,6 +17,17 @@
       <link rel="stylesheet" href="css/responsive.css">
 
       <style type="text/css">
+         /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
          .digit{
             width: 60px;
          }
@@ -28,7 +39,7 @@
             font-size: 30px;
          }
          .answer {
-            width: 60px;
+            width: 70px;
          }
       </style>
    </head>
@@ -136,8 +147,8 @@
          <!-- Page Content  -->
          <div id="content-page" class="content-page">
             <div class="container-fluid" x-data="{
-               isExam: false, digits: [], ops: [], qt: 0, progress: true, unique: true, allEq: [], examEq: [],
-               currExam:{}, currQestion: 1, 
+               isExam: true, digits: [], ops: [], qt: 0, progress: true, unique: true, allEq: [], examEq: [],
+               currExam:{}, currQestion: 0, answerEq:[],
                startExam() {
                   // validate the request
                   if(this.digits.length == 0) {
@@ -186,7 +197,20 @@
                   this.isExam = true;
                },
 
+               nextQuestion() {
+                  console.log(this.currExam);
+                  this.answerEq.push(this.currExam);
+                  this.currQestion++;
+                  this.currExam = this.examEq[this.currQestion];
+               },
+
+               prevQuestion() {
+                  this.currQestion--;
+                  this.currExam = this.examEq[this.currQestion];
+               },
+
                endExam() {
+                  console.log(this.answerEq);
                   this.isExam = false;
                   this.digits = [];
                   this.ops = [];
@@ -208,6 +232,10 @@
                      return '÷';
                   if('m' == op)
                      return '×';
+                },
+
+                currentQuestionIndex() {
+                  return this.currQestion + 1;
                 }
             }">
 
@@ -276,26 +304,26 @@
                <div class="iq-card" id="test-run" x-show="isExam">
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
-                        <h4 class="card-title">Test execution</h4>
+                        <h4>
+                           <div>
+                              <span>Question</span>
+                              <span x-text="currentQuestionIndex">x</span>
+                              <span>out of</span>
+                              <span x-text="examEq.length">y</span>
+                           </div>
+                        </h4>
                      </div>
                   </div>
                   <div class="iq-card-body">
-                     <div>
-                        <span>Question</span>
-                        <span x-text="currQestion">x</span>
-                        <span>out of</span>
-                        <span x-text="examEq.length">y</span>
-                     </div><br/>
+                     <span>Write the answer in the box and <b>hit enter</b> to move to the next question.</span>
+                     <br/><br/>
                     <div class="questionDiv">
                       <span class="digit" x-text="currExam.d"></span>
                       <span class="operation" x-text="opConverter(currExam.op)"></span>
                       <span class="digit" x-text="currExam.ex"></span>
                       <span>=</span>
-                      <input type="number" class="answer" x-model="currExam.ans">
-                    </div><br/><br/>
-                    <button type="button" class="btn btn-success" @click="prevQuestion()"><< Previous</button>
-                    <button type="button" class="btn btn-success" @click="nextQuestion()">Next >></button>
-                    <br/><br/>
+                      <input type="number" class="answer" x-model="currExam.ans" @keyup.enter="nextQuestion()">
+                    </div><br/><br/>                
                      <button type="button" class="btn btn-primary" @click="endExam()">End test</button>
                   </div>
                </div>               
